@@ -1,0 +1,22 @@
+<% if (!has_config('comment.repo') || !has_config('comment.repo_id') || !has_config('comment.category_id')) { %>
+<div class="notification is-danger">
+    You forgot to set <code>repo</code>, <code>repo_id</code>, or <code>category_id</code> for Giscus. Please set it in <code>_config.yml</code>.
+</div>
+<% } else { %>
+<div id="giscus-container"></div>
+<script src="https://giscus.app/client.js"
+        data-repo="<%= get_config('comment.repo') %>"
+        data-repo-id="<%= get_config('comment.repo_id') %>"
+        data-category="<%= get_config('comment.category', 'Announcements') %>"
+        data-category-id="<%= get_config('comment.category_id') %>"
+        data-mapping="<%= get_config('comment.mapping', 'pathname') %>"
+        data-strict="<%= get_config('comment.strict', '0') %>"
+        data-reactions-enabled="<%= get_config('comment.reactions_enabled', '1') %>"
+        data-emit-metadata="<%= get_config('comment.emit_metadata', '0') %>"
+        data-input-position="<%= get_config('comment.input_position', 'bottom') %>"
+        data-theme="<%= get_config('comment.theme', 'light') %>"
+        data-lang="<%= get_config('comment.lang', 'zh-CN') %>"
+        crossorigin="anonymous"
+        async>
+</script>
+<% } %>
