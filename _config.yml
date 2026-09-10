@@ -105,3 +105,11 @@ deploy:
   type: git
   repo: https://github.com/Trevoewu/Trevoewu.github.io.git
   branch: main
+
+# Sass / SCSS Compiler Settings
+node_sass:
+  silenceDeprecations:
+    - legacy-js-api
+    - import
+    - global-builtin
+    - color-functions
