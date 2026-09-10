@@ -3,6 +3,7 @@ title: 'Wireshark Lab: IP v7.0'
 date: 2023-04-20 18:22:06
 tags: [computer network,lab]
 description: 在本实验中, 我们将研究 IP 协议,重点关注IP datagram. 我们将通过分析在执行 traceroute 程序发送和接收的一系列 IP 数据报的过程来完成这个实验,我们将研究IP datagram 中的各个字段(fields)，并详细研究 IP fragmentation 的方法
+hidden: true
 ---
 -  Select the first ICMP Echo Request message sent by your computer, and expand the Internet Protocol part of the packet in the packet details window.(选择您的计算机发送的第一个 ICMP Echo Request 消息，并在数据包详细信息窗口中展开数据包的 Internet 协议部分)
 不知道为什么, 我的电脑只能收到Time to live exceeded报文段.

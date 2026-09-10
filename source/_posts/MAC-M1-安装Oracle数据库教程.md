@@ -4,6 +4,7 @@ date: 2023-04-21 20:35:34
 tags: [mac使用指南, oracle, 教程]
 categories: mac使用指南
 description: oracle目前还没有支持M1的版本, 本教程使用SSH来远程登录oracle服务器
+hidden: true
 ---
 
 oracle目前还没有支持M1的版本, 本教程使用SSH来远程登录oracle服务器

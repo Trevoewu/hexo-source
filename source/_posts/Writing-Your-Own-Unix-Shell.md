@@ -3,7 +3,8 @@ title: Writing Your Own Unix Shell
 date: 2023-07-09 16:26:25
 tags: [csapp,lab]
 categories: [csapp]
-description: 
+description:
+hidden: true
 ---
 
 这个任务的目的是让你更加熟悉进程控制和信号传递的概念。你将通过编写一个简单的Unix shell程序来实现作业控制。

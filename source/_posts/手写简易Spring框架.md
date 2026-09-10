@@ -4,6 +4,7 @@ date: 2023-06-09 14:10:22
 tags: [spring]
 categories: [spring,java,javaweb]
 description: 在实例化一个对象时，我们通过`ClassPathXmlApplicationContext()`，传入我们的配置文件，拿到一个`ApplicationContext`对象，通过`ApplicationContext`对象调用`getBean（）`方法来获取对象, 最终调用对象发方法，来使用Bean。
+hidden: true
 ---
 
 在实例化一个对象时，我们通过`ClassPathXmlApplicationContext()`，传入我们的配置文件，拿到一个`ApplicationContext`对象，通过`ApplicationContext`对象调用`getBean（）`方法来获取对象, 最终调用对象发方法，来使用Bean。

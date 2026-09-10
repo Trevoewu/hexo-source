@@ -3,7 +3,8 @@ title: 'Wireshark Lab: ICMP'
 date: 2023-05-05 10:48:32
 tags: [computer network,lab]
 categories: 学习
-description: 
+description:
+hidden: true
 ---
 
 In this lab, we’ll explore several aspects of the ICMP protocol: 

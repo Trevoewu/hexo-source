@@ -3,6 +3,7 @@ title: Wireshark lab HTTP
 date: 2023-04-20 23:01:49
 tags: computer network
 description: 在这个实验中，我们会探索HTTP协议的几个方面：基本的GET/response交互，HTTP消息格式，检索大型HTML文件，检索具有嵌入对象的HTML文件，HTTP认证和安全性
+hidden: true
 ---
 
 在这个实验中，我们会探索HTTP协议的几个方面：基本的GET/response交互，HTTP消息格式，检索大型HTML文件，检索具有嵌入对象的HTML文件，HTTP认证和安全性

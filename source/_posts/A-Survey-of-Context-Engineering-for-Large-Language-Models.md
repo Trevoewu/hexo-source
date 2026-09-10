@@ -2,6 +2,7 @@
 title: A Survey of Context Engineering for Large Language Models
 date: 2025-07-27 11:58:48
 tags: NLP
+hidden: true
 ---
 
 This survey introduces a new field called **Context Engineering**, which is about carefully choosing and organizing the information we give to Large Language Models (LLMs), like ChatGPT, so they can work better. It's more than just writing good prompts — it’s about designing the full package of information the model uses to think and respond.
