@@ -14,6 +14,7 @@ open_graph:
 # logo:
 #   text: <logo string>
 logo:
+  text: Trevor's Blog
 
 article:
   # Show word count and estimated reading time.
@@ -37,8 +38,7 @@ toc: false
 
 # Share plugin settings.
 share:
-  type: sharethis
-  install_url: https://platform-api.sharethis.com/js/sharethis.js#property=6aa24f71f405f0c114bb6023&product=sop
+  type: native
 
 # Comment plugin settings.
 comment:
