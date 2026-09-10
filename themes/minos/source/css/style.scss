@@ -1,6 +1,20 @@
 $family-serif: "Ovo", "Georgia", "STZhongsong", "Microsoft YaHei", serif;
 $family-mono: "Source Code Pro", monospace, "Microsoft YaHei";
-$border-color: #dbdbdb;
+
+// Theme Palette
+$theme-bg: #FAF9F5;
+$theme-fg: #1F1E1D;
+$theme-accent: #93B259;
+$border-color: #E5E2DA;
+$theme-fg-muted: rgba(31, 30, 29, 0.65);
+$theme-fg-subtle: rgba(31, 30, 29, 0.45);
+$theme-accent-hover: darken($theme-accent, 10%);
+
+html,
+body {
+    background-color: $theme-bg;
+    color: $theme-fg;
+}
 
 body,
 button,
@@ -10,10 +24,90 @@ textarea {
     font-family: $family-serif;
 }
 
+::selection {
+    background: rgba(147, 178, 89, 0.25);
+    color: $theme-fg;
+}
+
+a {
+    color: $theme-accent;
+
+    &:hover {
+        color: $theme-accent-hover;
+    }
+}
+
+h1, h2, h3, h4, h5, h6,
+.title,
+.subtitle,
+strong {
+    color: $theme-fg;
+}
+
+.content {
+    color: $theme-fg;
+
+    h1, h2, h3, h4, h5, h6,
+    strong {
+        color: $theme-fg;
+    }
+
+    a {
+        color: $theme-accent;
+
+        &:hover {
+            color: $theme-accent-hover;
+        }
+    }
+
+    blockquote {
+        background-color: rgba(31, 30, 29, 0.03);
+        border-left: 4px solid $theme-accent;
+        color: $theme-fg;
+    }
+
+    hr {
+        background-color: $border-color;
+    }
+
+    table {
+        background-color: transparent;
+        color: $theme-fg;
+
+        td, th {
+            border-color: $border-color;
+            color: $theme-fg;
+        }
+
+        thead th {
+            color: $theme-fg;
+        }
+
+        tr:hover {
+            background-color: rgba(31, 30, 29, 0.03);
+        }
+    }
+
+    :not(pre) > code {
+        background-color: rgba(31, 30, 29, 0.05);
+        color: $theme-accent-hover;
+        border-radius: 3px;
+        padding: 0.2em 0.4em;
+    }
+}
 
 a.tag.article-tag {
     font-size: 0.9rem;
     text-decoration: none;
+    background-color: rgba(31, 30, 29, 0.05);
+    color: $theme-fg-muted;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: rgba(147, 178, 89, 0.15);
+        color: $theme-accent;
+    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -23,25 +117,36 @@ a.tag.article-tag {
     }
 
     .navbar.is-transparent .navbar-dropdown a.navbar-item:hover {
-        color: #3273dc;
+        color: $theme-accent;
     }
 }
 
 .navbar-main {
+    background-color: $theme-bg;
     border-bottom: 1px solid $border-color;
     transition: 0.1s ease-in;
 
     .navbar-logo {
         font-size: 1.5rem;
         font-weight: 600;
+        color: $theme-fg;
+
+        &:hover {
+            color: $theme-accent;
+        }
     }
 
     .navbar-item {
         text-align: center;
+        color: $theme-fg;
+
+        &:hover {
+            color: $theme-accent;
+        }
     }
 
     a.navbar-item.is-active {
-        color: #3273dc;
+        color: $theme-accent;
     }
 
     .toc .navbar-dropdown {
@@ -50,9 +155,32 @@ a.tag.article-tag {
     }
 }
 
+.navbar-menu,
+.navbar-dropdown {
+    background-color: $theme-bg;
+    box-shadow: 0 8px 16px rgba(31, 30, 29, 0.08);
+
+    .navbar-item {
+        color: $theme-fg;
+
+        &:hover {
+            color: $theme-accent;
+            background-color: rgba(31, 30, 29, 0.03);
+        }
+    }
+}
+
+.navbar-burger {
+    color: $theme-fg;
+
+    &:hover {
+        background-color: rgba(31, 30, 29, 0.05);
+    }
+}
+
 .article {
     .second-date-block {
-        color: gray;
+        color: $theme-fg-subtle;
         font-size: 0.8rem;
     }
 
@@ -67,13 +195,15 @@ a.tag.article-tag {
         border-bottom: 1px dotted transparent;
 
         &:hover {
-            border-bottom-color: black;
+            color: $theme-accent;
+            border-bottom-color: $theme-accent;
         }
     }
 
     .article-meta {
         font-size: .9rem;
         text-transform: uppercase;
+        color: $theme-fg-muted;
 
         @media screen and (max-width: 768px) {
             margin-top: 0.75rem;
@@ -86,6 +216,11 @@ a.tag.article-tag {
 
         .article-category-link {
             margin: 0 0.3rem;
+            color: $theme-fg-muted;
+
+            &:hover {
+                color: $theme-accent;
+            }
         }
     }
 
@@ -105,6 +240,8 @@ a.tag.article-tag {
                 content: '#';
                 position: absolute;
                 right: 100%;
+                padding-right: 0.5rem;
+                color: $theme-accent;
             }
         }
 
@@ -115,19 +252,24 @@ a.tag.article-tag {
 
     .article-more-link a {
         font-size: .9rem;
-        color: darkgray;
+        color: $theme-accent;
         border-bottom: 1px dotted transparent;
 
         &:hover {
-            border-bottom-color: darkgray;
+            color: $theme-accent-hover;
+            border-bottom-color: $theme-accent-hover;
         }
     }
 
     .article-nav {
         a {
-            color: darkgray;
+            color: $theme-fg-muted;
             position: relative;
             display: inline-block;
+
+            &:hover {
+                color: $theme-accent;
+            }
         }
 
         .article-nav-prev a {
@@ -168,12 +310,12 @@ a.tag.article-tag {
 
     .caption {
         display: block;
-        color: darkgray;
+        color: $theme-fg-subtle;
         font-size: .95rem;
         text-align: center;
     }
 
-    a[target="_blank"] {
+    a[target="_blank"]:not(.friend-card) {
         &:after {
             display: none;
             content: "\f35d";
@@ -184,6 +326,20 @@ a.tag.article-tag {
         .fa-external-link-alt {
             margin-left: .3rem;
             width: .8rem;
+        }
+    }
+
+    .friend-card {
+        &:after,
+        &:before {
+            display: none !important;
+            content: none !important;
+        }
+
+        .fa-external-link-alt,
+        svg,
+        .svg-inline--fa {
+            display: none !important;
         }
     }
 
@@ -316,6 +472,7 @@ a.tag.article-tag {
 
     &>.title {
         font-weight: 300;
+        color: $theme-fg;
     }
 }
 
@@ -335,12 +492,12 @@ a.tag.article-tag {
         border-left: 3px solid transparent;
 
         &:hover {
-            border-left-color: black;
+            border-left-color: $theme-accent;
         }
 
         time {
             font-size: .9rem;
-            color: darkgray;
+            color: $theme-fg-subtle;
         }
 
         h6 {
@@ -351,7 +508,8 @@ a.tag.article-tag {
                 border-bottom: 1px dotted transparent;
 
                 &:hover {
-                    border-bottom-color: darkgray;
+                    color: $theme-accent;
+                    border-bottom-color: $theme-accent;
                 }
             }
         }
@@ -361,10 +519,21 @@ a.tag.article-tag {
 .footer {
     font-size: .9rem;
     background: transparent;
+    color: $theme-fg-muted;
 
     .content {
         padding-top: 2rem;
         border-top: 1px solid $border-color;
+    }
+
+    a {
+        color: inherit;
+        border-bottom: 1px dotted transparent;
+
+        &:hover {
+            color: $theme-accent;
+            border-bottom-color: $theme-accent;
+        }
     }
 }
 
@@ -404,11 +573,12 @@ a.tag.article-tag {
             box-shadow: none;
             font-weight: 200;
             border-radius: 0;
-            background: #fff;
+            background: $theme-bg;
+            color: $theme-fg;
             line-height: 20px;
             box-sizing: border-box;
             padding: 12px 28px 12px 20px;
-            border-bottom: 1px solid #e2e2e2;
+            border-bottom: 1px solid $border-color;
         }
 
         .searchbox-close {
@@ -421,9 +591,10 @@ a.tag.article-tag {
             position: absolute;
             text-align: center;
             display: inline-block;
+            color: $theme-fg-muted;
 
             &:hover {
-                color: #3273dc;
+                color: $theme-accent;
             }
         }
     }
@@ -445,6 +616,9 @@ a.tag.article-tag {
         bottom: 100px;
         margin-left: -270px;
         box-sizing: border-box;
+        background: $theme-bg;
+        border: 1px solid $border-color;
+        box-shadow: 0 10px 30px rgba(31, 30, 29, 0.15);
 
         @media screen and (max-width: 559px),
         screen and (max-height: 479px) {
@@ -453,7 +627,7 @@ a.tag.article-tag {
             margin: 0;
             width: 100%;
             height: 100%;
-            background: #f7f7f7;
+            background: $theme-bg;
         }
     }
 }
@@ -468,6 +642,9 @@ figure.highlight {
     padding: 0;
     width: 100%;
     margin: 0 0 1.5rem;
+    background: rgba(31, 30, 29, 0.02);
+    border: 1px solid $border-color;
+    border-radius: 4px;
 
     pre,
     table tr:hover {
@@ -490,7 +667,7 @@ figure.highlight {
 
     figcaption,
     .gutter {
-        background: rgba(200, 200, 200, 0.15);
+        background: rgba(31, 30, 29, 0.05);
     }
 
     figcaption {
@@ -498,20 +675,28 @@ figure.highlight {
         text-align: left;
         font-style: normal;
         font-size: .8rem;
+        border-bottom: 1px solid $border-color;
 
         span {
             font-weight: 500;
             font-family: $family-mono;
+            color: $theme-fg;
         }
 
         a {
             float: right;
-            color: #9a9a9a;
+            color: $theme-fg-muted;
+
+            &:hover {
+                color: $theme-accent;
+            }
         }
     }
 
     .gutter {
         text-align: right;
+        border-right: 1px solid $border-color;
+        color: $theme-fg-subtle;
     }
 
     .tag,
@@ -538,6 +723,7 @@ figure.highlight {
     .pagination-next,
     .pagination-link {
         border: 1px solid transparent;
+        color: $theme-fg;
 
         &:active {
             box-shadow: none;
@@ -547,18 +733,25 @@ figure.highlight {
 
     .pagination-link {
         &:hover {
-            border-color: black;
+            border-color: $theme-accent;
+            color: $theme-accent;
         }
     }
 
     .pagination-link.is-current {
-        background-color: black;
+        background-color: $theme-accent;
+        border-color: $theme-accent;
+        color: $theme-bg;
     }
 
     .pagination-previous a,
     .pagination-next a {
         position: relative;
         color: inherit;
+
+        &:hover {
+            color: $theme-accent;
+        }
     }
 
     .pagination-previous a {

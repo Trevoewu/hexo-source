@@ -4,6 +4,7 @@ date: 2024-10-28 09:46:26
 tags: [考研]
 categories: [日记]
 description:
+hidden: true
 ---
 
 October 28 Monday 2024, there are 54 days left before the Postgraduate Entrance Examination. 9:30 am, I wake up from bed. I have been slacking off quite a lot—sleeping late, not waking up on time, and completing fewer tasks than I supposed to do. For this, I've conclude the following reasons.

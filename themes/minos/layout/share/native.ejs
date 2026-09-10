@@ -1,0 +1,249 @@
+<div class="native-share-container">
+    <span class="share-label"><i class="fas fa-share-alt"></i> 分享本文：</span>
+    <div class="share-buttons">
+        <!-- 微信分享 -->
+        <div class="share-item wechat-wrapper">
+            <a class="share-btn wechat-btn" href="javascript:void(0);" title="分享到微信">
+                <i class="fab fa-weixin"></i>
+                <span>微信</span>
+            </a>
+            <div class="wechat-qrcode-popup" id="wechat-qrcode-popup">
+                <div id="wechat-qrcode"></div>
+                <p>微信扫一扫分享文章</p>
+            </div>
+        </div>
+
+        <!-- 微博分享 -->
+        <div class="share-item">
+            <a class="share-btn weibo-btn" href="https://service.weibo.com/share/share.php?url=<%= encodeURIComponent(page.permalink) %>&title=<%= encodeURIComponent(page.title || config.title) %>" target="_blank" rel="noopener noreferrer" title="分享到微博">
+                <i class="fab fa-weibo"></i>
+                <span>微博</span>
+            </a>
+        </div>
+
+        <!-- QQ 分享 -->
+        <div class="share-item">
+            <a class="share-btn qq-btn" href="https://connect.qq.com/widget/shareqq/index.html?url=<%= encodeURIComponent(page.permalink) %>&title=<%= encodeURIComponent(page.title || config.title) %>" target="_blank" rel="noopener noreferrer" title="分享给QQ好友">
+                <i class="fab fa-qq"></i>
+                <span>QQ</span>
+            </a>
+        </div>
+
+        <!-- 复制链接 -->
+        <div class="share-item">
+            <button class="share-btn copy-btn" id="copy-share-link" type="button" title="复制文章链接">
+                <i class="fas fa-link" id="copy-btn-icon"></i>
+                <span id="copy-btn-text">复制链接</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+.native-share-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 14px 0;
+    margin-top: 1.5rem;
+    border-top: 1px dashed #e8e8e8;
+    border-bottom: 1px dashed #e8e8e8;
+}
+.native-share-container .share-label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+.native-share-container .share-buttons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.native-share-container .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    color: #4a5568;
+    transition: all 0.2s ease;
+    outline: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.native-share-container .share-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+.native-share-container .wechat-btn:hover {
+    color: #07c160;
+    border-color: #07c160;
+}
+.native-share-container .weibo-btn:hover {
+    color: #e6162d;
+    border-color: #e6162d;
+}
+.native-share-container .qq-btn:hover {
+    color: #12b7f5;
+    border-color: #12b7f5;
+}
+.native-share-container .copy-btn:hover {
+    color: #3273dc;
+    border-color: #3273dc;
+}
+.native-share-container .copy-btn.copied {
+    background-color: #f0fdf4 !important;
+    color: #16a34a !important;
+    border-color: #86efac !important;
+}
+.native-share-container .wechat-wrapper {
+    position: relative;
+}
+.native-share-container .wechat-qrcode-popup {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    border: 1px solid #eaeaea;
+    z-index: 100;
+    text-align: center;
+}
+.native-share-container .wechat-wrapper:hover .wechat-qrcode-popup,
+.native-share-container .wechat-qrcode-popup.is-active {
+    display: block;
+}
+.native-share-container .wechat-qrcode-popup::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+.native-share-container #wechat-qrcode {
+    width: 128px;
+    height: 128px;
+    margin: 0 auto 6px;
+}
+.native-share-container #wechat-qrcode img {
+    margin: 0 auto;
+    display: block;
+}
+.native-share-container .wechat-qrcode-popup p {
+    font-size: 0.75rem;
+    color: #888;
+    margin: 0;
+    white-space: nowrap;
+}
+</style>
+
+<script>
+(function() {
+    // 微信二维码生成
+    var wechatWrapper = document.querySelector('.wechat-wrapper');
+    var popup = document.getElementById('wechat-qrcode-popup');
+    var qrcodeContainer = document.getElementById('wechat-qrcode');
+    var qrCreated = false;
+
+    function renderQR() {
+        if (qrCreated) return;
+        qrCreated = true;
+        if (window.QRCode) {
+            new QRCode(qrcodeContainer, {
+                text: window.location.href,
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.M
+            });
+        } else {
+            var script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js';
+            script.onload = function() {
+                new QRCode(qrcodeContainer, {
+                    text: window.location.href,
+                    width: 128,
+                    height: 128,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.M
+                });
+            };
+            document.body.appendChild(script);
+        }
+    }
+
+    if (wechatWrapper) {
+        wechatWrapper.addEventListener('mouseenter', renderQR);
+        wechatWrapper.addEventListener('click', function(e) {
+            renderQR();
+            if (popup) popup.classList.toggle('is-active');
+        });
+        document.addEventListener('click', function(e) {
+            if (popup && !wechatWrapper.contains(e.target)) {
+                popup.classList.remove('is-active');
+            }
+        });
+    }
+
+    // 复制链接功能
+    var copyBtn = document.getElementById('copy-share-link');
+    var copyBtnText = document.getElementById('copy-btn-text');
+    var copyBtnIcon = document.getElementById('copy-btn-icon');
+
+    if (copyBtn) {
+        copyBtn.addEventListener('click', function() {
+            var url = window.location.href;
+            var copyPromise;
+
+            if (navigator.clipboard && window.isSecureContext) {
+                copyPromise = navigator.clipboard.writeText(url);
+            } else {
+                var textarea = document.createElement('textarea');
+                textarea.value = url;
+                textarea.style.position = 'fixed';
+                textarea.style.left = '-999999px';
+                textarea.style.top = '-999999px';
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    copyPromise = Promise.resolve();
+                } catch (err) {
+                    copyPromise = Promise.reject(err);
+                }
+                textarea.remove();
+            }
+
+            copyPromise.then(function() {
+                copyBtn.classList.add('copied');
+                if (copyBtnText) copyBtnText.textContent = '已复制！';
+                if (copyBtnIcon) copyBtnIcon.className = 'fas fa-check';
+
+                setTimeout(function() {
+                    copyBtn.classList.remove('copied');
+                    if (copyBtnText) copyBtnText.textContent = '复制链接';
+                    if (copyBtnIcon) copyBtnIcon.className = 'fas fa-link';
+                }, 2000);
+            }).catch(function() {
+                prompt('复制链接失败，请手动复制：', url);
+            });
+        });
+    }
+})();
+</script>
