@@ -23,15 +23,15 @@
                 <img src="<%- url_for('images/logo.png') %>" alt="" height="28">
                 <% } %>
             </a>
-            <div class="navbar-burger">
+            <button class="navbar-burger" type="button" aria-label="展开导航" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
         <% if (has_config('menu')) { %>
         <div class="navbar-menu navbar-start">
-            <% for (let i in get_config('menu')) { let menu = get_config('menu')[i]; %>
+            <% for (let i in get_config('menu')) { let menu = get_config('menu')[i]; if (!menu) continue; %>
             <a class="navbar-item <% if (typeof(page.path) !== 'undefined' && is_same_link(menu, page.path)) { %>is-active<% } %>"
                href="<%- url_for(menu) %>"><%= i %></a>
             <% } %>
@@ -40,7 +40,7 @@
         <div class="navbar-menu navbar-end">
             <% if (has_config('search')) { %>
             <a class="navbar-item search" title="<%= __('nav.search') %>" href="javascript:;">
-                <i class="fas fa-search"></i>
+                <span>搜索</span>
             </a>
             <% } %>
             <% if (has_config('toc') && get_config('toc') === true && typeof(page.content) !== 'undefined') { %>
@@ -75,3 +75,12 @@
         </div>
     </div>
 </nav>
+
+<script>
+    document.querySelector('.navbar-burger').addEventListener('click', function () {
+        const expanded = this.getAttribute('aria-expanded') !== 'true';
+        this.setAttribute('aria-expanded', String(expanded));
+        this.classList.toggle('is-active', expanded);
+        document.querySelectorAll('.navbar-main .navbar-menu').forEach(menu => menu.classList.toggle('is-active', expanded));
+    });
+</script>

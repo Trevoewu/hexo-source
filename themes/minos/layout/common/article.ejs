@@ -1,4 +1,4 @@
-<article class="article content gallery" itemscope itemprop="blogPost">
+<article class="article content <%= index ? 'article-preview' : 'gallery' %>" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         <% if (index) { %>
             <a href="<%- url_for(post.link ? post.link : post.path) %>" itemprop="url"><%= post.title %></a>
@@ -38,12 +38,16 @@
         </span>
         <% } %>
     </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <p class="article-more-link">
-            <a href="<%- url_for(post.path) %>#more"><%= __('article.read_more') %></a>
-        </p>
+    <% if (!index && (post.content.match(/<h[1-6]\b/gi) || []).length >= 3) { %>
+    <details class="reading-toc">
+        <summary>文章目录</summary>
+        <nav aria-label="文章目录"><%- toc(post.content, {list_number: false}) %></nav>
+    </details>
+    <% } %>
+    <div class="article-entry" itemprop="articleBody">
+    <% if (index) { %>
+        <p class="article-summary"><%= truncate(strip_html(post.description || post.excerpt || post.content).replace(/\s+/g, ' ').trim(), {length: 150, omission: '…'}) %></p>
+        <p class="article-more-link"><a href="<%- url_for(post.link || post.path) %>" aria-label="阅读全文：<%= post.title %>">阅读全文</a></p>
     <% } else { %>
         <%- post.content %>
     <% } %>

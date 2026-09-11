@@ -1,10 +1,4 @@
 (function ($) {
-    $('.navbar-burger').click(function () {
-        $(this).toggleClass('is-active');
-        $('.navbar-main .navbar-start').toggleClass('is-active');
-        $('.navbar-main .navbar-end').toggleClass('is-active');
-    });
-
     // Hide Header on on scroll down
     var didScroll;
     var lastScrollTop = 0;
@@ -63,7 +57,7 @@
         if ($(this).parent('a').length === 0) {
             $(this).wrap('<a class="gallery-item" href="' + $(this).attr('src') + '"></a>');
             if (this.alt) {
-                $(this).after('<div class="caption">' + this.alt + '</div>');
+                $(this).after($('<span class="caption"></span>').text(this.alt));
             }
         }
     });
