@@ -66,7 +66,7 @@
         var keywordArray = parseKeywords(keywords);
         var containKeywords = keywordArray.filter(function (keyword) {
             var containFields = fields.filter(function (field) {
-                if (!obj.hasOwnProperty(field))
+                if (!obj.hasOwnProperty(field) || obj[field] == null)
                     return false;
                 if (obj[field].toUpperCase().indexOf(keyword) > -1)
                     return true;
@@ -104,13 +104,18 @@
     function weight (keywords, obj, fields, weights) {
         var value = 0;
         parseKeywords(keywords).forEach(function (keyword) {
-            var pattern = new RegExp(keyword, 'img'); // Global, Multi-line, Case-insensitive
-            fields.forEach(function (field, index) {
-                if (obj.hasOwnProperty(field)) {
-                    var matches = obj[field].match(pattern);
-                    value += matches ? matches.length * weights[index] : 0;
-                }
-            });
+            try {
+                var escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                var pattern = new RegExp(escapedKeyword, 'img'); // Global, Multi-line, Case-insensitive
+                fields.forEach(function (field, index) {
+                    if (obj.hasOwnProperty(field) && obj[field] != null) {
+                        var matches = obj[field].match(pattern);
+                        value += matches ? matches.length * weights[index] : 0;
+                    }
+                });
+            } catch (e) {
+                // Ignore any regex errors
+            }
         });
         return value;
     }
