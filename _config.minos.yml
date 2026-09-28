@@ -41,23 +41,25 @@ search:
 toc: false
 
 # Share plugin settings.
-share:
-  type: native
+share: null
+# share:
+#   type: native
 
 # Comment plugin settings.
-comment:
-  type: giscus
-  repo: Trevoewu/Trevoewu.github.io
-  repo_id: R_kgDOJZM2yQ
-  category: Announcements
-  category_id: DIC_kwDOJZM2yc4DFSE0
-  mapping: pathname
-  strict: 0
-  reactions_enabled: 1
-  emit_metadata: 0
-  input_position: bottom
-  theme: preferred_color_scheme
-  lang: zh-CN
+comment: null
+# comment:
+#   type: giscus
+#   repo: Trevoewu/Trevoewu.github.io
+#   repo_id: R_kgDOJZM2yQ
+#   category: Announcements
+#   category_id: DIC_kwDOJZM2yc4DFSE0
+#   mapping: pathname
+#   strict: 0
+#   reactions_enabled: 1
+#   emit_metadata: 0
+#   input_position: bottom
+#   theme: preferred_color_scheme
+#   lang: zh-CN
 
 # Other plugins and their settings.
 plugins:
